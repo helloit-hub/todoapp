@@ -35,11 +35,9 @@ const updateTodo = async (req, res) => {
       title: req.body.title,
       description: req.body.description,
     };
-    const response = (await model.updateOne(todoId, todo))
-      ? res.json({ message: `ID : ${todoId} has been Successfully Updated` })
+    (await model.updateOne(todoId, todo))
+      ? res.json({ message: `ID : ${todoId.id} has been Successfully Updated` })
       : res.json({ message: "Not able to Update" });
-
-    res.json(response);
   } catch (error) {
     res.json(error.message);
   }
@@ -49,7 +47,7 @@ const deleteTodo = async (req, res) => {
   try {
     const todoId = { id: req.params.id };
     await model.deleteOne(todoId);
-    res.json({ message: `ID : ${todoId} has Been Deleted` });
+    res.json({ message: `ID : ${todoId.id} has Been Deleted` });
   } catch (error) {
     res.json(error.message);
   }
